@@ -11,7 +11,7 @@ st.markdown(
 )
 
 # Load image from file (hard-coded)
-image_path = Path("picture.jpg")
+image_path = Path("picture.jpeg")
 image_base64 = ""
 
 if image_path.exists():
