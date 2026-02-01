@@ -10,7 +10,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Load image from code (no upload)
+# Load image from file
 image_path = Path("photo.jpg")
 image_base64 = ""
 
@@ -55,7 +55,7 @@ html(
 
         #result {{
             margin-top: 30px;
-            padding-bottom: 80px;
+            padding-bottom: 120px;
         }}
     </style>
 
@@ -111,10 +111,17 @@ html(
                 </iframe>
 
                 <h2>I love you ❤️😍</h2>
-                {"<img src='data:image/jpeg;base64," + image_base64 + "' style='max-width:90%; height:auto; border-radius:22px;'/>" if image_base64 else ""}
+                <img src="data:image/jpeg;base64,{image_base64}"
+                     style="max-width:90%; height:auto; border-radius:22px;">
             `;
+
+            setTimeout(() => {{
+                document.getElementById("result")
+                    .scrollIntoView({{ behavior: "smooth" }});
+            }}, 300);
         }}
     </script>
     """,
-    height=1000,
+    height=1300,
+    scrolling=True
 )
