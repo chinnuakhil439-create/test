@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit.components.v1 import html
 import base64
+from pathlib import Path
 
 st.set_page_config(page_title="Valentine 💘", layout="centered")
 
@@ -9,16 +10,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Upload photo (only you see this while setting up)
-uploaded_file = st.file_uploader(
-    "Upload a picture of us 💑 (JPG / PNG)",
-    type=["jpg", "jpeg", "png"]
-)
-
+# Load image from file (hard-coded)
+image_path = Path("picture.jpg")
 image_base64 = ""
-if uploaded_file:
-    image_bytes = uploaded_file.read()
-    image_base64 = base64.b64encode(image_bytes).decode()
+
+if image_path.exists():
+    image_base64 = base64.b64encode(image_path.read_bytes()).decode()
 
 html(
     f"""
@@ -73,8 +70,8 @@ html(
         const yesBtn = document.getElementById("yesBtn");
 
         function moveNoButton() {{
-            const x = Math.random() * 250;
-            const y = Math.random() * 200;
+            const x = Math.random() * 260;
+            const y = Math.random() * 210;
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
 
@@ -109,7 +106,7 @@ html(
                 </iframe>
 
                 <h2>I love you ❤️😍</h2>
-                {"<img src='data:image/png;base64," + image_base64 + "' width='320' style='border-radius:22px;'/>" if image_base64 else ""}
+                {"<img src='data:image/jpeg;base64," + image_base64 + "' width='320' style='border-radius:22px;'/>" if image_base64 else ""}
                 <br><br>
                 <img src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif" width="260">
             `;
