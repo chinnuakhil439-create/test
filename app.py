@@ -10,8 +10,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Load image from file (hard-coded)
-image_path = Path("picture.jpeg")
+# Load image from code (no upload)
+image_path = Path("photo.jpg")
 image_base64 = ""
 
 if image_path.exists():
@@ -52,6 +52,11 @@ html(
             color: white;
             cursor: pointer;
         }}
+
+        #result {{
+            margin-top: 30px;
+            padding-bottom: 80px;
+        }}
     </style>
 
     <div id="container">
@@ -61,7 +66,7 @@ html(
 
     <div id="result"></div>
 
-    <!-- Confetti library -->
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -106,12 +111,10 @@ html(
                 </iframe>
 
                 <h2>I love you ❤️😍</h2>
-                {"<img src='data:image/jpeg;base64," + image_base64 + "' width='320' style='border-radius:22px;'/>" if image_base64 else ""}
-                <br><br>
-                <img src="https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif" width="260">
+                {"<img src='data:image/jpeg;base64," + image_base64 + "' style='max-width:90%; height:auto; border-radius:22px;'/>" if image_base64 else ""}
             `;
         }}
     </script>
     """,
-    height=620,
+    height=1000,
 )
